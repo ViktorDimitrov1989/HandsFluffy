@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".activities.UsersDetailsActivity"></activity>-->
+        <!-- <activity android:name=".activities.UsersDetailsActivity"></activity> -->
+        <activity android:name=".activities.SkinSelectionActivity"></activity>
     </application>
 
 </manifest>
