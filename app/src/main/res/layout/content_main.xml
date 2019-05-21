@@ -1,126 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activities.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <TableRow
+    <TableLayout
+        android:id="@+id/skin_selection_form"
         android:layout_width="match_parent"
-        android:layout_weight="2"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        >
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="55dp"
+        android:background="#778899"
+        android:orientation="vertical">
 
-        <RadioGroup
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:gravity="center">
 
-            <RadioButton
-                android:id="@+id/dryHandsRadioBtn"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/screen_info"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:text="Изберете тип кожа:" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <RadioGroup
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:layout_weight="1"
-                android:background="@mipmap/ic_launcher"
-                android:button="@null" />
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/softHandsRadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:layout_weight="1"
-                android:background="@mipmap/ic_launcher"
-                android:button="@null" />
+                <RadioButton
+                    android:id="@+id/dryHandsRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:background="@mipmap/ic_launcher"
+                    android:button="@null" />
 
-            <RadioButton
-                android:id="@+id/mediumHandsRadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:layout_weight="1"
-                android:background="@mipmap/ic_launcher"
-                android:button="@null" />
+                <RadioButton
+                    android:id="@+id/softHandsRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:background="@mipmap/ic_launcher"
+                    android:button="@null" />
 
-        </RadioGroup>
-    </TableRow>
+            </RadioGroup>
+        </TableRow>
 
-    <TableRow
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/notification_info"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:text="Брой известия, които ще получавате на ден, зависимост от посочения от вас тип кожа: 4" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+
+        </TableRow>
+    </TableLayout>
+
+    <Button
         android:layout_width="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary"
-        >
+        android:layout_height="wrap_content"
+        android:layout_below="@id/skin_selection_form"
+        android:layout_centerHorizontal="true"
+        android:background="#d67601"
+        android:text="Вход"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_weight="1">
-
-            <CheckBox
-                android:id="@+id/pn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:text="Пн" />
-
-            <CheckBox
-                android:id="@+id/vt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:text="Вт" />
-
-            <CheckBox
-                android:id="@+id/sr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:text="Ср" />
-
-            <CheckBox
-                android:id="@+id/cht"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:text="Чт" />
-
-            <CheckBox
-                android:id="@+id/pt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:text="Пт" />
-
-            <CheckBox
-                android:id="@+id/sb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:text="Сб" />
-
-            <CheckBox
-                android:id="@+id/nd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:text="Нд" />
-        </LinearLayout>
-    </TableRow>
-
-</TableLayout>
+</RelativeLayout>

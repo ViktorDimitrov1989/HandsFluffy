@@ -4,10 +4,18 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+<!--        <item
+            android:id="@+id/exit"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
+            android:title="Изход" />-->
+        <!--<item
+            android:id="@+id/begin"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Изход" />-->
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Изход" />
+            android:id="@+id/info"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="За нас" />
     </group>
 
 
