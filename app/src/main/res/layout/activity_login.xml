@@ -51,6 +51,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:id="@+id/email_value"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableTint="#FF4081"
@@ -66,6 +67,7 @@
                     >
 
                     <EditText
+                        android:id="@+id/password_value"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -86,6 +88,8 @@
         </RelativeLayout>
 
         <Button
+            android:id="@+id/login_btn"
+            android:onClick="onClick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/login_form_fields"
