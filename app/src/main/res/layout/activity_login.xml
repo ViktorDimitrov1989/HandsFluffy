@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.LoginActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5fb0c9"
+    android:background="@drawable/background_1"
     android:orientation="vertical"
-    android:scrollbarAlwaysDrawVerticalTrack="true">
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    tools:context=".activities.LoginActivity"
+    >
 
     <android.support.percent.PercentRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#778899"
         android:orientation="vertical">
 
         <TextView
@@ -63,8 +62,7 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    >
+                    android:layout_marginTop="15dp">
 
                     <EditText
                         android:id="@+id/password_value"
@@ -89,20 +87,19 @@
 
         <Button
             android:id="@+id/login_btn"
-            android:onClick="onClick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/login_form_fields"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="55dp"
-            android:background="#d67601"
+            android:layout_marginRight="30dp"
+            android:background="@color/fluffyPurple"
+            android:onClick="onClick"
             android:text="Вход"
             android:textAllCaps="false"
             android:textColor="#fff"
-            android:textSize="18sp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            />
+            android:textSize="18sp" />
     </android.support.percent.PercentRelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
