@@ -10,7 +10,8 @@
         android:theme="@style/AppTheme"
         >
         <activity
-            android:name=".activities.LoginActivity">
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,8 +19,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainActivity"></activity>
-        <service android:name=".backgroundServices.NotificationService"/>
+            android:name=".activities.MainActivity"
+            android:screenOrientation="portrait"/>
+        <!--<service android:name=".backgroundServices.NotificationService" />-->
     </application>
 
 </manifest>
