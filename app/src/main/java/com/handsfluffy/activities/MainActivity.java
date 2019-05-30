@@ -1,7 +1,11 @@
 package com.handsfluffy.activities;
 
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -15,6 +19,9 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.handsfluffy.R;
+import com.handsfluffy.backgroundServices.NotificationReceiver;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,13 +44,17 @@ public class MainActivity extends AppCompatActivity
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(checkedId == R.id.normalHandsRadioBtn){
                     Toast.makeText(MainActivity.this, "Normal Hands notifications", Toast.LENGTH_SHORT).show();
+                    sendNotification();
                     //TODO: start background service to popup notifications for normal skin type
                 }else if(checkedId == R.id.dryHandsRadioBtn){
                     Toast.makeText(MainActivity.this, "Dry Hands notifications", Toast.LENGTH_SHORT).show();
+                    sendNotification();
                     //TODO: start background service to popup notifications for dry skin type
                 }
             }
         });
+
+        //cal.add(Calendar.SECOND, 5);
 
         //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         /*fab.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +73,21 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void sendNotification(){
+        //TODO:start notification receiver
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.SECOND, 5);
+        /*cal.set(Calendar.HOUR_OF_DAY, 22);
+        cal.set(Calendar.MINUTE, 45);*/
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Intent notificationIntent = new Intent(this, NotificationReceiver.class);
+        PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
     }
 
     @Override
