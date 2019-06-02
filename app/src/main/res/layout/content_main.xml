@@ -46,8 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:layout_weight="1"
-                    android:background="@mipmap/ic_launcher"
-                    android:button="@null"
+                    android:button="@drawable/dry_hands_btn_slector"
                     />
 
                 <RadioButton
@@ -56,8 +55,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:layout_weight="1"
-                    android:background="@mipmap/ic_launcher"
-                    android:button="@null" />
+                    android:button="@drawable/normal_hands_btn_selector"
+                    />
 
             </RadioGroup>
         </TableRow>
