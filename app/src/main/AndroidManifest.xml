@@ -2,16 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.handsfluffy">
 
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:label="Sprinkle"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:label="Hands Fluffy"
-        >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait">
@@ -23,9 +22,11 @@
         </activity>
         <activity
             android:name=".activities.MainActivity"
-            android:screenOrientation="portrait"/>
-        <!--<service android:name=".backgroundServices.NotificationService" />-->
-        <receiver android:name=".backgroundServices.NotificationReceiver"/>
+            android:screenOrientation="portrait" />
+        <!-- <service android:name=".backgroundServices.NotificationService" /> -->
+        <receiver android:name=".backgroundServices.NotificationReceiver" />
+
+        <activity android:name=".activities.ForUsActivity"></activity>
     </application>
 
 </manifest>

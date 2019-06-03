@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ForUsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0ff"
+        android:padding="15dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/info_text_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/info_text_1"
+            />
+
+        <ImageView
+            android:id="@+id/group_photo_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/group_photo"
+            />
+
+        <TextView
+            android:id="@+id/info_text_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/info_text_2"
+            app:layout_constraintBottom_toBottomOf="@id/group_photo_1"/>
+
+        <ImageView
+            android:id="@+id/spray_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/spray_image"
+            app:layout_constraintBottom_toBottomOf="@id/info_text_2" />
+
+        <TextView
+            android:id="@+id/info_text_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/info_text_3"
+            app:layout_constraintBottom_toBottomOf="@id/spray_image"/>
+    </LinearLayout>
+
+
+</ScrollView>
