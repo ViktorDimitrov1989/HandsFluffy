@@ -70,7 +70,7 @@
                 android:id="@+id/notification_info"
                 android:layout_width="0dp"
                 android:gravity="center"
-                android:text="Брой известия, които ще получавате на ден, зависимост от посочения от вас тип кожа: 4" />
+                android:text="@string/apply_cnt_info_message" />
 
         </TableRow>
 
