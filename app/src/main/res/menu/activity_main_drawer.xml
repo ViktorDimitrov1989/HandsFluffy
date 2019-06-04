@@ -6,13 +6,13 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/info"
+            android:id="@+id/info_side_nav"
             android:icon="@drawable/ic_info_black_24dp"
             android:title="За нас" />
 
         <item
-            android:id="@+id/begin"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:id="@+id/exit_side_nav"
+            android:icon="@drawable/ic_power_settings_new_black_24dp"
             android:title="Изход" />
 
     </group>

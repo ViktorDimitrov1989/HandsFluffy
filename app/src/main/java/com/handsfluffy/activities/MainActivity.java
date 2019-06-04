@@ -74,41 +74,6 @@ public class MainActivity extends AppCompatActivity
         infoMessageTextView.setText(applyCntInfoMsg);
     }
 
-    private void sendNotifications(SkinType type){
-
-        //first call
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.SECOND, 5);
-        //second call
-        Calendar cal1 = Calendar.getInstance();
-        cal1.add(Calendar.SECOND, 10);
-
-
-        if(type == SkinType.DRY){
-
-        }else if(type == SkinType.NORMAL){
-
-        }
-
-
-        /*cal.set(Calendar.HOUR_OF_DAY, 22);
-        cal.set(Calendar.MINUTE, 45);
-        cal.set(Calendar.SECOND, 0);*/
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        AlarmManager alarmManager1 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        Intent notificationIntent = new Intent(this, NotificationReceiver.class);
-        PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-
-        Intent notificationIntent1 = new Intent(this, NotificationReceiver.class);
-        PendingIntent broadcast1 = PendingIntent.getBroadcast(this, 101, notificationIntent1, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
-        alarmManager1.set(AlarmManager.RTC_WAKEUP, cal1.getTimeInMillis(), broadcast1);
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -125,9 +90,13 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        /*if (id == R.id.nav_camera) {
-            Toast.makeText(this, "Изход асдасдасд", Toast.LENGTH_SHORT).show();
-        }*/
+        if (id == R.id.exit_side_nav) {
+            //TODO: clear all stats
+            Toast.makeText(this, "Изход", Toast.LENGTH_SHORT).show();
+        }else if(id == R.id.info_side_nav){
+            Intent aboutUsIntent = new Intent(this, ForUsActivity.class);
+            startActivity(aboutUsIntent);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

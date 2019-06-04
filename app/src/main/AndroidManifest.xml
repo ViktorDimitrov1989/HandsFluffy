@@ -23,7 +23,6 @@
         <activity
             android:name=".activities.MainActivity"
             android:screenOrientation="portrait" />
-        <!-- <service android:name=".backgroundServices.NotificationService" /> -->
         <receiver android:name=".backgroundServices.NotificationReceiver" />
 
         <activity android:name=".activities.ForUsActivity"></activity>
