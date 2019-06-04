@@ -48,13 +48,9 @@ public class MainActivity extends AppCompatActivity
                 if(checkedId == R.id.normalHandsRadioBtn){
                     AlarmManagerUtil.setAlarmManagers(NORMAL_SKIN_ALARMS_CNT, getBaseContext());
                     handleApplyInfoMessage(NORMAL_SKIN_ALARMS_CNT + "");
-                    //TODO:comment this
-                    Toast.makeText(MainActivity.this, "Normal Hands notifications", Toast.LENGTH_SHORT).show();
                 }else if(checkedId == R.id.dryHandsRadioBtn){
-                    //TODO:comment this
                     AlarmManagerUtil.setAlarmManagers(DRY_SKIN_ALARMS_CNT, getBaseContext());
                     handleApplyInfoMessage(DRY_SKIN_ALARMS_CNT + "");
-                    Toast.makeText(MainActivity.this, "Dry Hands notifications", Toast.LENGTH_SHORT).show();
                 }
             }
         });
