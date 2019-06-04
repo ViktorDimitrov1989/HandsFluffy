@@ -1,4 +1,4 @@
-package com.handsfluffy.factories;
+package com.handsfluffy.util;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public final class AlarmManagerFactory {
+public final class AlarmManagerUtil {
 
     private static AlarmManager alarmManager;
 
@@ -20,7 +20,7 @@ public final class AlarmManagerFactory {
 
     private static List<Calendar> alarms = new ArrayList<>();
 
-    private AlarmManagerFactory() {
+    private AlarmManagerUtil() {
     }
 
     private static final AlarmTime[] alarmTimes = new AlarmTime[]{
@@ -59,6 +59,21 @@ public final class AlarmManagerFactory {
     }
 
     private static void resetAlarmManagers() {
+        if (pendingIntents == null || pendingIntents.size() == 0) {
+            return;
+        }
+
+        for (PendingIntent pendingIntent : pendingIntents) {
+            alarmManager.cancel(pendingIntent);
+        }
+
+        pendingIntents.clear();
+        alarms.clear();
+    }
+
+    public static void resetExactAlarmManager(Context context){
+        alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
         if (pendingIntents == null || pendingIntents.size() == 0) {
             return;
         }

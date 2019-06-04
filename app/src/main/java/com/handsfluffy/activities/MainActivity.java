@@ -1,9 +1,7 @@
 package com.handsfluffy.activities;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,11 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.handsfluffy.R;
-import com.handsfluffy.backgroundServices.NotificationReceiver;
-import com.handsfluffy.enums.SkinType;
-import com.handsfluffy.factories.AlarmManagerFactory;
-
-import java.util.Calendar;
+import com.handsfluffy.util.AlarmManagerUtil;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,6 +28,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(!isLoggedIn()){
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            startActivity(loginIntent);
+        }
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -46,13 +46,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(checkedId == R.id.normalHandsRadioBtn){
-                    AlarmManagerFactory.setAlarmManagers(NORMAL_SKIN_ALARMS_CNT, getBaseContext());
+                    AlarmManagerUtil.setAlarmManagers(NORMAL_SKIN_ALARMS_CNT, getBaseContext());
                     handleApplyInfoMessage(NORMAL_SKIN_ALARMS_CNT + "");
                     //TODO:comment this
                     Toast.makeText(MainActivity.this, "Normal Hands notifications", Toast.LENGTH_SHORT).show();
                 }else if(checkedId == R.id.dryHandsRadioBtn){
                     //TODO:comment this
-                    AlarmManagerFactory.setAlarmManagers(DRY_SKIN_ALARMS_CNT, getBaseContext());
+                    AlarmManagerUtil.setAlarmManagers(DRY_SKIN_ALARMS_CNT, getBaseContext());
                     handleApplyInfoMessage(DRY_SKIN_ALARMS_CNT + "");
                     Toast.makeText(MainActivity.this, "Dry Hands notifications", Toast.LENGTH_SHORT).show();
                 }
@@ -80,7 +80,12 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+
+            if(!isLoggedIn()){
+                super.onBackPressed();
+            }else{
+               this.exitApp();
+            }
         }
     }
 
@@ -91,8 +96,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.exit_side_nav) {
-            //TODO: clear all stats
-            Toast.makeText(this, "Изход", Toast.LENGTH_SHORT).show();
+            this.clearIsLoggedIn();
+            this.exitApp();
         }else if(id == R.id.info_side_nav){
             Intent aboutUsIntent = new Intent(this, ForUsActivity.class);
             startActivity(aboutUsIntent);
@@ -101,6 +106,28 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private boolean isLoggedIn(){
+        SharedPreferences isLoggedPref = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+        return isLoggedPref.getBoolean(LoginActivity.IS_LOGGED_PROPERTY_NAME, false);
+    }
+
+    private void clearIsLoggedIn() {
+        //cancel all alarms
+        AlarmManagerUtil.resetExactAlarmManager(this);
+        SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean(LoginActivity.IS_LOGGED_PROPERTY_NAME, false);
+        editor.apply();
+        finish();
+    }
+
+    public void exitApp(){
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
     }
 
 }
