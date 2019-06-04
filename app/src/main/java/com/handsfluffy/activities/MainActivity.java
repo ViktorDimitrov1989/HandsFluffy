@@ -3,6 +3,7 @@ package com.handsfluffy.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -37,19 +38,29 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         infoMessageTextView = findViewById(R.id.notification_info);
-        handleApplyInfoMessage(NORMAL_SKIN_ALARMS_CNT + "");
         setSupportActionBar(toolbar);
         RadioGroup skinTypesRadioGroup = findViewById(R.id.skin_types_radio_group);
+
+        final SharedPreferences preferences = getSharedPreferences("saved", 0);
+        skinTypesRadioGroup.check(preferences.getInt("CheckedID", 0));
+        handleApplyInfoMessage(preferences.getString("AlarmsCnt", ""));
 
         skinTypesRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putInt("CheckedID", checkedId);
+
                 if(checkedId == R.id.normalHandsRadioBtn){
                     AlarmManagerUtil.setAlarmManagers(NORMAL_SKIN_ALARMS_CNT, getBaseContext());
                     handleApplyInfoMessage(NORMAL_SKIN_ALARMS_CNT + "");
+                    editor.putString("AlarmsCnt", NORMAL_SKIN_ALARMS_CNT + "");
+                    editor.apply();
                 }else if(checkedId == R.id.dryHandsRadioBtn){
                     AlarmManagerUtil.setAlarmManagers(DRY_SKIN_ALARMS_CNT, getBaseContext());
                     handleApplyInfoMessage(DRY_SKIN_ALARMS_CNT + "");
+                    editor.putString("AlarmsCnt", DRY_SKIN_ALARMS_CNT + "");
+                    editor.apply();
                 }
             }
         });
