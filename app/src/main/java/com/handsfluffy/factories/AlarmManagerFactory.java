@@ -12,6 +12,12 @@ import java.util.List;
 
 public final class AlarmManagerFactory {
 
+    private static List<AlarmManager> alarmManagers = new ArrayList<>();
+
+    private static List<PendingIntent> pendingIntents = new ArrayList<>();
+
+    private static List<Calendar> alarms = new ArrayList<>();
+
     private AlarmManagerFactory(){}
 
     private static final AlarmTime[] alarmTimes = new AlarmTime[]{
@@ -24,41 +30,59 @@ public final class AlarmManagerFactory {
     };
 
     private static List<Calendar> getAlarmsHourBasedOnSkinTypes(int alarmsCnt){
-        List<Calendar> result = new ArrayList<>();
-
         for (int i = 0; i < alarmsCnt; i++) {
             AlarmTime currentAlarmTime = alarmTimes[i];
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.HOUR_OF_DAY, currentAlarmTime.getHours());
-            result.add(cal);
+            alarms.add(cal);
         }
 
-        return result;
+        return alarms;
     }
 
     private static List<PendingIntent> getPendingIntents(int alarmsCnt, Context context){
         int uniqueIntentIndex = 100;
 
-        List<PendingIntent> intents = new ArrayList<>();
         for (int i = 0; i < alarmsCnt; i++) {
             Intent notificationIntent = new Intent(context, NotificationReceiver.class);
             PendingIntent broadcast = PendingIntent.getBroadcast(context, uniqueIntentIndex++, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            intents.add(broadcast);
+            pendingIntents.add(broadcast);
         }
 
-        return intents;
+        return pendingIntents;
+    }
+
+    private static void resetAlarmManagers(){
+        int index = 0;
+
+        if(alarmManagers == null || alarmManagers.size() == 0){
+            return;
+        }
+
+        for (AlarmManager alarmManager : alarmManagers) {
+            PendingIntent pendingIntent = pendingIntents.get(index);
+            if(pendingIntent != null){
+                alarmManager.cancel(pendingIntents.get(index));
+            }
+            index++;
+        }
+
+        alarmManagers.clear();
+        pendingIntents.clear();
+        alarms.clear();
+
     }
 
     public static void setAlarmManagers(int alarmsCnt, Context context){
-
-        List<AlarmManager> res = new ArrayList<>();
-        List<Calendar> alarms = getAlarmsHourBasedOnSkinTypes(alarmsCnt);
-        List<PendingIntent> pendingIntents = getPendingIntents(alarmsCnt, context);
+        resetAlarmManagers();
+        alarms = getAlarmsHourBasedOnSkinTypes(alarmsCnt);
+        pendingIntents = getPendingIntents(alarmsCnt, context);
 
         for (int i = 0; i < alarmsCnt; i++) {
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             alarmManager.set(AlarmManager.RTC_WAKEUP, alarms.get(i).getTimeInMillis(), pendingIntents.get(i));
+            alarmManagers.add(alarmManager);
         }
 
     }

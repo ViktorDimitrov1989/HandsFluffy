@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.handsfluffy.R;
 import com.handsfluffy.backgroundServices.NotificationReceiver;
 import com.handsfluffy.enums.SkinType;
+import com.handsfluffy.factories.AlarmManagerFactory;
+
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
@@ -38,24 +40,21 @@ public class MainActivity extends AppCompatActivity
         infoMessageTextView = findViewById(R.id.notification_info);
         handleApplyInfoMessage("");
         setSupportActionBar(toolbar);
-
         RadioGroup skinTypesRadioGroup = findViewById(R.id.skin_types_radio_group);
-        //TODO: set onclick listeners to the buttons and create custom method to handle it
+
         skinTypesRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(checkedId == R.id.normalHandsRadioBtn){
-                    //TODO:uncomment this
-                    //AlarmManagerFactory.setAlarmManagers(NORMAL_SKIN_ALARMS_CNT, this);
+                    AlarmManagerFactory.setAlarmManagers(NORMAL_SKIN_ALARMS_CNT, getBaseContext());
                     handleApplyInfoMessage(NORMAL_SKIN_ALARMS_CNT + "");
+                    //TODO:comment this
                     Toast.makeText(MainActivity.this, "Normal Hands notifications", Toast.LENGTH_SHORT).show();
-                    sendNotifications(SkinType.NORMAL);
                 }else if(checkedId == R.id.dryHandsRadioBtn){
-                    //TODO:uncomment this
-                    //AlarmManagerFactory.setAlarmManagers(DRY_SKIN_ALARMS_CNT, this);
+                    //TODO:comment this
+                    AlarmManagerFactory.setAlarmManagers(DRY_SKIN_ALARMS_CNT, getBaseContext());
                     handleApplyInfoMessage(DRY_SKIN_ALARMS_CNT + "");
                     Toast.makeText(MainActivity.this, "Dry Hands notifications", Toast.LENGTH_SHORT).show();
-                    sendNotifications(SkinType.DRY);
                 }
             }
         });
