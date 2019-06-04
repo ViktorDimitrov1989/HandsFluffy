@@ -10,9 +10,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.handsfluffy.R;
 import com.handsfluffy.util.AlarmManagerUtil;
 
@@ -33,12 +33,11 @@ public class MainActivity extends AppCompatActivity
             startActivity(loginIntent);
         }
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         infoMessageTextView = findViewById(R.id.notification_info);
-        handleApplyInfoMessage("");
+        handleApplyInfoMessage(NORMAL_SKIN_ALARMS_CNT + "");
         setSupportActionBar(toolbar);
         RadioGroup skinTypesRadioGroup = findViewById(R.id.skin_types_radio_group);
 
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.exit_side_nav) {
-            this.clearIsLoggedIn();
+            this.logout();
             this.exitApp();
         }else if(id == R.id.info_side_nav){
             Intent aboutUsIntent = new Intent(this, ForUsActivity.class);
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity
         return isLoggedPref.getBoolean(LoginActivity.IS_LOGGED_PROPERTY_NAME, false);
     }
 
-    private void clearIsLoggedIn() {
+    private void logout() {
         //cancel all alarms
         AlarmManagerUtil.resetExactAlarmManager(this);
         SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
@@ -122,7 +121,7 @@ public class MainActivity extends AppCompatActivity
     public void exitApp(){
         Intent a = new Intent(Intent.ACTION_MAIN);
         a.addCategory(Intent.CATEGORY_HOME);
-        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);*/
         startActivity(a);
     }
 
